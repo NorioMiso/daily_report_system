@@ -15,8 +15,7 @@
                 <c:out value="${flush}"></c:out>
             </div>
         </c:if>
-
-        <h2>従業員 一覧</h2>
+        <h2>従業員　一覧</h2>
         <table id="employee_list">
             <tbody>
                 <tr>
@@ -31,7 +30,7 @@
                         <td>
                             <c:choose>
                                 <c:when test="${employee.deleteFlag == AttributeConst.DEL_FLAG_TRUE.getIntegerValue()}">
-                                    (削除済み)
+                                    （削除済み）
                                 </c:when>
                                 <c:otherwise>
                                     <a href="<c:url value='?action=${actEmp}&command=${commShow}&id=${employee.id}' />">詳細を見る</a>
@@ -57,5 +56,6 @@
             </c:forEach>
         </div>
         <p><a href="<c:url value='?action=${actEmp}&command=${commNew}' />">新規従業員の登録</a></p>
+
     </c:param>
 </c:import>
