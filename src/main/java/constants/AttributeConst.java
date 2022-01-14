@@ -10,6 +10,7 @@ public enum AttributeConst {
     TOKEN("_token"),
     ERR("errors"),
 
+    LOGIN_EMP("login_employee"),
     LOGIN_ERR("loginError"),
 
     EMPLOYEE("employee"),
