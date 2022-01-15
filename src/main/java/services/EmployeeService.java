@@ -62,7 +62,7 @@ public class EmployeeService extends ServiceBase {
         ev.setCreatedAt(now);
         ev.setUpdatedAt(now);
 
-        List<String> errors = validators.EmployeeValidator.validate(this, ev, true, true);
+        List<String> errors = models.validators.EmployeeValidator.validate(this, ev, true, true);
 
         if(errors.size() == 0) {
             create(ev);
@@ -92,7 +92,7 @@ public class EmployeeService extends ServiceBase {
         LocalDateTime today = LocalDateTime.now();
         savedEmp.setUpdatedAt(today);
 
-        List<String> errors = validators.EmployeeValidator.validate(this, savedEmp, validateCode, validatePass);
+        List<String> errors = models.validators.EmployeeValidator.validate(this, savedEmp, validateCode, validatePass);
 
         if (errors.size() == 0) {
             update(savedEmp);
