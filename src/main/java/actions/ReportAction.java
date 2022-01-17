@@ -133,7 +133,7 @@ public class ReportAction extends ActionBase {
                 putRequestScope(AttributeConst.REPORT, rv);
                 putRequestScope(AttributeConst.ERR, errors);
 
-                forward(ForwardConst.FW_ERR_UNKNOWN);
+                forward(ForwardConst.FW_REP_EDIT);
             } else {
                 putSessionScope(AttributeConst.FLUSH, MessageConst.I_UPDATED.getMessage());
 
