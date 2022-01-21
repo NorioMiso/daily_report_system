@@ -33,11 +33,16 @@ public interface JpaConst {
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
     String TABLE_LIKE = "likes";
+
     String LIKE_COL_ID = "id";
     String LIKE_COL_EMP = "employee_id";
     String LIKE_COL_REP = "report_id";
     String LIKE_COL_CREATED_AT = "created_at";
     String LIKE_COL__UPDATED_AT = "updated_at";
+    String LIKE_COL_LIKED_FLAG = "liked_flag";
+
+    int LIKE_DONE = 1;
+    int LIKE_NONE = 0;
 
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
@@ -46,6 +51,7 @@ public interface JpaConst {
     String JPQL_PARM_CODE = "code"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード
     String JPQL_PARM_EMPLOYEE = "employee"; //従業員
+    String JPQL_PARM_REPORT = "report";
 
     //NamedQueryの nameとquery
     //全ての従業員をidの降順に取得する
@@ -60,6 +66,7 @@ public interface JpaConst {
     //指定した社員番号を保持する従業員の件数を取得する
     String Q_EMP_COUNT_RESISTERED_BY_CODE = ENTITY_EMP + ".countRegisteredByCode";
     String Q_EMP_COUNT_RESISTERED_BY_CODE_DEF = "SELECT COUNT(e) FROM Employee AS e WHERE e.code = :" + JPQL_PARM_CODE;
+
     //全ての日報をidの降順に取得する
     String Q_REP_GET_ALL = ENTITY_REP + ".getAll";
     String Q_REP_GET_ALL_DEF = "SELECT r FROM Report AS r ORDER BY r.id DESC";
@@ -74,5 +81,17 @@ public interface JpaConst {
     String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
 
+    //すべてのlikeをidの降順に取得する
+    //String Q_LIKE_GET_ALL = ENTITY_LIKE + ".getAll";
+    //String Q_LIKE_GET_ALL_DEF = "SELECT l FROM Like AS l ORDER BY l.id DESC";
+    //すべてのlikeの件数を取得する
+    //String Q_LIKE_COUNT = ENTITY_LIKE + ".count";
+    //String Q_LIKE_COUNT_DEF = "SELECT COUNT(l) FROM like AS l";
 
+    //指定した日報に押されたいいねを全件idの降順で取得する
+    String Q_LIKE_GET_ALL_MINE = ENTITY_LIKE + ".getAllMine";
+    String Q_LIKE_GET_ALL_MINE_DEF = "SELECT l FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT + " ORDER BY l.id DESC";
+    //指定した日報に押されたいいねの件数を取得する
+    String Q_LIKE_COUNT_ALL_MINE = ENTITY_LIKE + ".countAllMine";
+    String Q_LIKE_COUNT_ALL_MINE_DEF = "SELECT COUNT(l) From like AS l WHERE l.report = :" + JPQL_PARM_REPORT;
 }

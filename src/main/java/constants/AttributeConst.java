@@ -20,7 +20,7 @@ public enum AttributeConst {
     EMP_CODE("code"),
     EMP_PASS("password"),
     EMP_NAME("name"),
-    EMP_ADMIN_FLG("admin_flg"),
+    EMP_ADMIN_FLG("admin_flag"),
 
     ROLE_ADMIN(1),
     ROLE_GENERAL(0),
@@ -40,9 +40,9 @@ public enum AttributeConst {
     LIKES("likes"),
     LIKE_COUNT("like_count"),
     LIKE_ID("id"),
-    LIKE_FLAG("like_flg"),
-    LIKE_FLAG_DONE(1),
-    LIKE_FLAG_NONE(0);
+    LIKED_FLAG("liked_flag"),
+    LIKE_DONE(1),
+    LIKE_NONE(0);
 
     private final String text;
     private final Integer i;
