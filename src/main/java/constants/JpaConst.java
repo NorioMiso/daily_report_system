@@ -32,16 +32,8 @@ public interface JpaConst {
     String REP_COL_CREATED_AT = "created_at"; //登録日時
     String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
-    String TABLE_LIKE = "likes";
-    String LIKE_COL_ID = "id";
-    String LIKE_COL_EMP = "employee_id";
-    String LIKE_COL_REP = "report_id";
-    String LIKE_COL_CREATED_AT = "created_at";
-    String LIKE_COL__UPDATED_AT = "updated_at";
-
     String ENTITY_EMP = "employee"; //従業員
     String ENTITY_REP = "report"; //日報
-    String ENTITY_LIKE = "like";
 
     String JPQL_PARM_CODE = "code"; //社員番号
     String JPQL_PARM_PASSWORD = "password"; //パスワード

@@ -6,7 +6,6 @@
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
-<c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -40,15 +39,6 @@
                 </tr>
             </tbody>
         </table>
-
-        <br />
-        <form method="POST" action="<c:url value='action=${actRep}&command=${commShow}&id=${report.id}' />">
-            <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
-            <input type="hidden" name="${AttributeConst.LIKE.getValue()}" value="${AttributeConst.LIKE_DONE.getIntegerValue()}" />
-            <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
-            <button type="submit">この日報にいいね！する</button>
-
-        </form>
 
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>
