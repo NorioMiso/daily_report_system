@@ -38,7 +38,7 @@ public interface JpaConst {
     String LIKE_COL_EMP = "employee_id";
     String LIKE_COL_REP = "report_id";
     String LIKE_COL_CREATED_AT = "created_at";
-    String LIKE_COL__UPDATED_AT = "updated_at";
+    String LIKE_COL_UPDATED_AT = "updated_at";
     String LIKE_COL_LIKED_FLAG = "liked_flag";
 
     int LIKE_DONE = 1;
@@ -93,5 +93,5 @@ public interface JpaConst {
     String Q_LIKE_GET_ALL_MINE_DEF = "SELECT l FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT + " ORDER BY l.id DESC";
     //指定した日報に押されたいいねの件数を取得する
     String Q_LIKE_COUNT_ALL_MINE = ENTITY_LIKE + ".countAllMine";
-    String Q_LIKE_COUNT_ALL_MINE_DEF = "SELECT COUNT(l) From like AS l WHERE l.report = :" + JPQL_PARM_REPORT;
+    String Q_LIKE_COUNT_ALL_MINE_DEF = "SELECT COUNT(l) FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT;
 }
