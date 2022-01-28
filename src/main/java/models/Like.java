@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -40,10 +42,12 @@ public class Like {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = JpaConst.LIKE_COL_EMP, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = JpaConst.LIKE_COL_EMP, nullable = false)
     private Employee employee;
 
-    @Column(name = JpaConst.LIKE_COL_REP, nullable = false)
+    @ManyToOne
+    @JoinColumn(name = JpaConst.LIKE_COL_REP, nullable = false)
     private Report report;
 
     @Column(name = JpaConst.LIKE_COL_CREATED_AT, nullable = false)
