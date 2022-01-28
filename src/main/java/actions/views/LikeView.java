@@ -15,8 +15,8 @@ import lombok.Setter;
 public class LikeView {
 
     private Integer id;
-    private Integer employeeId;
-    private Integer reportId;
+    private EmployeeView employee;
+    private ReportView report;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
     private Integer likedFlag;

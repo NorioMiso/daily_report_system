@@ -25,6 +25,10 @@ public class LikeService extends ServiceBase{
         return count;
     }
 
+    public LikeView findOne(int id) {
+        return LikeConverter.toView(findOneInternal(id));
+    }
+
     public void create(LikeView lv) {
         LocalDateTime ldt = LocalDateTime.now();
         lv.setCreatedAt(ldt);

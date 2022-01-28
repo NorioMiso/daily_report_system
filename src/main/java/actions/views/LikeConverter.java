@@ -12,8 +12,8 @@ public class LikeConverter {
     public static Like toModel(LikeView lv) {
         return new Like(
                 lv.getId(),
-                lv.getEmployeeId(),
-                lv.getReportId(),
+                EmployeeConverter.toModel(lv.getEmployee()),
+                ReportConverter.toModel(lv.getReport()),
                 lv.getCreatedAt(),
                 lv.getUpdatedAt(),
                 //nullかどうか？
@@ -35,8 +35,8 @@ public class LikeConverter {
 
         return new LikeView(
                 l.getId(),
-                l.getEmployeeId(),
-                l.getReportId(),
+                EmployeeConverter.toView(l.getEmployee()),
+                ReportConverter.toView(l.getReport()),
                 l.getCreatedAt(),
                 l.getUpdatedAt(),
                 l.getLikedFlag() == null
@@ -58,8 +58,8 @@ public class LikeConverter {
 
     public static void copyViewToModel(Like l, LikeView lv) {
         l.setId(lv.getId());
-        l.setEmployeeId(lv.getEmployeeId());
-        l.setReportId(lv.getReportId());
+        l.setEmployee(EmployeeConverter.toModel(lv.getEmployee()));
+        l.setReport(ReportConverter.toModel(lv.getReport()));
         l.setCreatedAt(lv.getCreatedAt());
         l.setUpdatedAt(lv.getUpdatedAt());
         l.setLikedFlag(lv.getLikedFlag());

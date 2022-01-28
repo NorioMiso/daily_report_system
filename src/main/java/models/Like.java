@@ -41,10 +41,10 @@ public class Like {
     private Integer id;
 
     @Column(name = JpaConst.LIKE_COL_EMP, nullable = false)
-    private Integer employeeId;
+    private Employee employee;
 
     @Column(name = JpaConst.LIKE_COL_REP, nullable = false)
-    private Integer reportId;
+    private Report report;
 
     @Column(name = JpaConst.LIKE_COL_CREATED_AT, nullable = false)
     private LocalDateTime createdAt;
