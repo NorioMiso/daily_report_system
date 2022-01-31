@@ -21,11 +21,10 @@
                     <th class="like_date">日付</th>
                 </tr>
                 <c:forEach var="like" items="${likes}" varStatus="status">
-                    <fmt:parseDate value="${like.updatedAt}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
-
                     <tr class="row${status.count % 2}">
                         <td class="like_name"><c:out value="${like.employee.name}" /></td>
-                        <td class="like_date"><fmt:formatDate value='${updatedAt}' pattern='yyyy-MM-dd' /></td>
+                        <fmt:parseDate value="${like.updatedAt}" pattern="yyyy-MM-dd'T'HH:mm:ss" var="updateDay" type="date" />
+                        <td class="like_date"><fmt:formatDate value='${updateDay}' pattern="yyyy-MM-dd HH:mm:ss" /></td>
                     </tr>
                 </c:forEach>
             </tbody>
