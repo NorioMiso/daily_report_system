@@ -22,7 +22,7 @@
                     <th class="report_name">氏名</th>
                     <th class="report_date">日付</th>
                     <th class="report_title">タイトル</th>
-                    <th class="report_like">いいねされた数</th>
+                    <th class="report_like">いいね！された数</th>
                     <th class="report_action">操作</th>
                 </tr>
                 <c:forEach begin="0" end="${reports.size()-1}" step="1" var="i">
