@@ -32,8 +32,8 @@
                     <td><pre><c:out value="${report.content}" /></pre></td>
                 </tr>
                 <tr>
-                        <th>いいね！された数</th>
-                        <td><a href="<c:url value='?action=${actLike}&command=${commIdx}&id=${report.id}' />">いいねされた数を表示する</a></td>
+                    <th>いいね！された数</th>
+                    <td><a href="<c:url value='?action=${actLike}&command=${commIdx}&id=${report.id}' />">${like_count}</a></td>
                 </tr>
                 <tr>
                     <th>登録日時</th>
@@ -54,8 +54,7 @@
             <input type="hidden" name="${AttributeConst.LIKE.getValue()}" value="${AttributeConst.LIKE_DONE.getIntegerValue()}" />
             <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
             <button type="submit">この日報にいいね！する</button>
-
-        </form>
+　　      </form>
 
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>

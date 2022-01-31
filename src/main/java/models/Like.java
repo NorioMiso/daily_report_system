@@ -25,8 +25,8 @@ import lombok.Setter;
                 name = JpaConst.Q_LIKE_GET_ALL_MINE,
                 query = JpaConst.Q_LIKE_GET_ALL_MINE_DEF),
         @NamedQuery(
-                name = JpaConst.Q_LIKE_COUNT_ALL_MINE,
-                query = JpaConst.Q_LIKE_COUNT_ALL_MINE_DEF),
+                name = JpaConst.Q_LIKE_COUNT_ALL_PER_REPORT,
+                query = JpaConst.Q_LIKE_COUNT_ALL_PER_REPORT_DEF),
         @NamedQuery(
                 name = JpaConst.Q_LIKE_GET_BY_EMPID_AND_REPID,
                 query = JpaConst.Q_LIKE_GET_BY_EMPID_AND_REPID_DEF)

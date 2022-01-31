@@ -12,27 +12,34 @@ import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import services.LikeService;
 import services.ReportService;
 
 public class ReportAction extends ActionBase {
 
-    private ReportService service;
+    private ReportService reportService;
+    private LikeService likeService;
 
     @Override
     public void process() throws ServletException, IOException {
-        service = new ReportService();
+        reportService = new ReportService();
+        likeService = new LikeService();
 
         invoke();
-        service.close();
+
+        likeService.close();
+        reportService.close();
     }
 
     public void index() throws ServletException, IOException {
         int page = getPage();
-        List<ReportView> reports = service.getAllPerPage(page);
+        List<ReportView> reports = reportService.getAllPerPage(page);
+        //List<Long> likeCounts = likeService.getLikeCountsPerReports(reports);
 
-        long reportsCount = service.countAll();
+        long reportsCount = reportService.countAll();
 
         putRequestScope(AttributeConst.REPORTS, reports);
+        //putRequestScope(AttributeConst.LIKECOUNTS, likeCounts);
         putRequestScope(AttributeConst.REP_COUNT, reportsCount);
         putRequestScope(AttributeConst.PAGE, page);
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
@@ -77,7 +84,7 @@ public class ReportAction extends ActionBase {
                     null,
                     null);
 
-            List<String> errors = service.create(rv);
+            List<String> errors = reportService.create(rv);
 
             if (errors.size() > 0) {
                 putRequestScope(AttributeConst.TOKEN, getTokenId());
@@ -94,17 +101,25 @@ public class ReportAction extends ActionBase {
     }
 
     public void show() throws ServletException, IOException {
-        ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        long likeCount = 0;
+        try {
+            likeCount = likeService.countAllPerReport(rv);
+        } catch (NullPointerException e) {
+
+        }
+
         if (rv == null) {
             forward(ForwardConst.FW_ERR_UNKNOWN);
         } else {
             putRequestScope(AttributeConst.REPORT, rv);
+            putRequestScope(AttributeConst.LIKE_COUNT, likeCount);
             forward(ForwardConst.FW_REP_SHOW);
         }
     }
 
     public void edit() throws ServletException, IOException {
-        ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
         EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
 
@@ -120,13 +135,13 @@ public class ReportAction extends ActionBase {
 
     public void update() throws ServletException, IOException {
         if (checkToken()) {
-            ReportView rv = service.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+            ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
 
             rv.setReportDate(toLocalDate(getRequestParam(AttributeConst.REP_DATE)));
             rv.setTitle(getRequestParam(AttributeConst.REP_TITLE));
             rv.setContent(getRequestParam(AttributeConst.REP_CONTENT));
 
-            List<String> errors = service.update(rv);
+            List<String> errors = reportService.update(rv);
 
             if (errors.size() > 0) {
                 putRequestScope(AttributeConst.TOKEN, getTokenId());

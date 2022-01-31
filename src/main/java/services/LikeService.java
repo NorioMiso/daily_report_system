@@ -1,6 +1,7 @@
 package services;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import actions.views.LikeConverter;
@@ -22,7 +23,7 @@ public class LikeService extends ServiceBase{
     }
 
     public long countAllPerReport (ReportView report) {
-        long count = (long)em.createNamedQuery(JpaConst.Q_LIKE_COUNT_ALL_MINE, Long.class)
+        long count = (long) em.createNamedQuery(JpaConst.Q_LIKE_COUNT_ALL_PER_REPORT, Long.class)
                 .setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
                 .getSingleResult();
         return count;
@@ -74,5 +75,14 @@ public class LikeService extends ServiceBase{
         Like l = findOneInternal(lv.getId());
         LikeConverter.copyViewToModel(l, lv);
         em.getTransaction().commit();
+    }
+
+    public List<Long> getLikeCountsPerReports(List<ReportView> reports) {
+        List<Long> likeCounts = new ArrayList<Long>();
+        for(ReportView report : reports) {
+            Long likeCount = countAllPerReport(report);
+            likeCounts.add(likeCount);
+        }
+        return likeCounts;
     }
 }

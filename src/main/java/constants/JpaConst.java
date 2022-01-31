@@ -91,10 +91,10 @@ public interface JpaConst {
     //指定した日報に押されたいいね(likedFlag==1)を全件idの降順で取得する
     String Q_LIKE_GET_ALL_MINE = ENTITY_LIKE + ".getAllMine";
     String Q_LIKE_GET_ALL_MINE_DEF = "SELECT l FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT + " AND l.likedFlag = 1 ORDER BY l.id DESC";
-    //指定した日報に押されたいいねの件数を取得する
-    String Q_LIKE_COUNT_ALL_MINE = ENTITY_LIKE + ".countAllMine";
-    String Q_LIKE_COUNT_ALL_MINE_DEF = "SELECT COUNT(l) FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT;
-    //指定した従業員が、指定した日報に押したいいねを取得する
+    //指定した日報に押されたいいね(likedFlag==1)の件数を取得する
+    String Q_LIKE_COUNT_ALL_PER_REPORT = ENTITY_LIKE + ".countAllPerReport";
+    String Q_LIKE_COUNT_ALL_PER_REPORT_DEF = "SELECT COUNT(l) FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT + " AND l.likedFlag = 1";
+    //指定した従業員が、指定した日報に押したいいねを取得する(likedFlagは0でも1でも取得する)
     String Q_LIKE_GET_BY_EMPID_AND_REPID = ENTITY_LIKE + ".getByEmpIdAndRepId";
     String Q_LIKE_GET_BY_EMPID_AND_REPID_DEF = "SELECT l FROM Like AS l WHERE l.employee = :" + JPQL_PARM_EMPLOYEE + " AND l.report = :" + JPQL_PARM_REPORT;
 }
