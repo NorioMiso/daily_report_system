@@ -80,7 +80,7 @@ public class LikeService extends ServiceBase{
     public List<Long> getLikeCountsPerReports(List<ReportView> reports) {
         List<Long> likeCounts = new ArrayList<Long>();
         for(ReportView report : reports) {
-            Long likeCount = countAllPerReport(report);
+            long likeCount = countAllPerReport(report);
             likeCounts.add(likeCount);
         }
         return likeCounts;

@@ -34,12 +34,12 @@ public class ReportAction extends ActionBase {
     public void index() throws ServletException, IOException {
         int page = getPage();
         List<ReportView> reports = reportService.getAllPerPage(page);
-        //List<Long> likeCounts = likeService.getLikeCountsPerReports(reports);
+        List<Long> likeCounts = likeService.getLikeCountsPerReports(reports);
 
         long reportsCount = reportService.countAll();
 
         putRequestScope(AttributeConst.REPORTS, reports);
-        //putRequestScope(AttributeConst.LIKECOUNTS, likeCounts);
+        putRequestScope(AttributeConst.LIKE_COUNTS, likeCounts);
         putRequestScope(AttributeConst.REP_COUNT, reportsCount);
         putRequestScope(AttributeConst.PAGE, page);
         putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);

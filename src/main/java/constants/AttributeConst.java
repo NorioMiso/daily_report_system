@@ -39,6 +39,7 @@ public enum AttributeConst {
     LIKE("like"),
     LIKES("likes"),
     LIKE_COUNT("like_count"),
+    LIKE_COUNTS("like_counts"),
     LIKE_ID("id"),
     LIKED_FLAG("liked_flag"),
     LIKE_DONE(1),
