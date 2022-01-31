@@ -4,9 +4,12 @@
 <%@ page import="constants.ForwardConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
+<c:set var="actLike" value="${ForwardConst.ACT_LIKE.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 <c:set var="commEdt" value="${ForwardConst.CMD_EDIT.getValue()}" />
 <c:set var="commShow" value="${ForwardConst.CMD_SHOW.getValue()}" />
+<c:set var="commCrt" value="${ForwardConst.CMD_CREATE.getValue()}" />
+<c:set var="commCrtOrUpd" value="${ForwardConst.CMD_CREATEORUPDATE.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
     <c:param name="content">
@@ -30,7 +33,7 @@
                 </tr>
                 <tr>
                         <th>いいね！された数</th>
-                        <td><a href="">report.like</a></td>
+                        <td><a href="<c:url value='?action=${actLike}&command=${commIdx}&id=${report.id}' />">いいねされた数を表示する</a></td>
                 </tr>
                 <tr>
                     <th>登録日時</th>
@@ -46,7 +49,7 @@
         </table>
 
         <br />
-        <form method="POST" action="<c:url value='action=${actRep}&command=${commShow}&id=${report.id}' />">
+        <form method="POST" action="<c:url value='?action=${actLike}&command=${commCrtOrUpd}&id=${report.id}' />">
             <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
             <input type="hidden" name="${AttributeConst.LIKE.getValue()}" value="${AttributeConst.LIKE_DONE.getIntegerValue()}" />
             <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
