@@ -4,14 +4,20 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.List;
 
+import javax.persistence.NoResultException;
 import javax.servlet.ServletException;
 
+import actions.views.EmployeeConverter;
 import actions.views.EmployeeView;
+import actions.views.ReportConverter;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
 import constants.JpaConst;
 import constants.MessageConst;
+import models.Employee;
+import models.Like;
+import models.Report;
 import services.LikeService;
 import services.ReportService;
 
@@ -109,11 +115,28 @@ public class ReportAction extends ActionBase {
 
         }
 
+        // ログイン従業員が、このレポートにいいねしているかを調べる
+        EmployeeView ev = (EmployeeView) getSessionScope(AttributeConst.LOGIN_EMP);
+        Employee e = EmployeeConverter.toModel(ev);
+        Report r = ReportConverter.toModel(rv);
+        Like like = null;
+        try {
+            like = likeService.getByEmpAndRep(e, r);
+        } catch (NoResultException ex) {
+
+        }
+        boolean notLikedYet = true;
+        if (like != null && like.getLikedFlag() == 1) {
+            notLikedYet = false;
+        }
+
         if (rv == null) {
             forward(ForwardConst.FW_ERR_UNKNOWN);
         } else {
             putRequestScope(AttributeConst.REPORT, rv);
             putRequestScope(AttributeConst.LIKE_COUNT, likeCount);
+            putRequestScope(AttributeConst.LIKE_NOT_LIKED_YET, notLikedYet);
+            putRequestScope(AttributeConst.TOKEN, getTokenId());
             forward(ForwardConst.FW_REP_SHOW);
         }
     }

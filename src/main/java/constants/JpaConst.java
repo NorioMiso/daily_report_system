@@ -95,6 +95,6 @@ public interface JpaConst {
     String Q_LIKE_COUNT_ALL_PER_REPORT = ENTITY_LIKE + ".countAllPerReport";
     String Q_LIKE_COUNT_ALL_PER_REPORT_DEF = "SELECT COUNT(l) FROM Like AS l WHERE l.report = :" + JPQL_PARM_REPORT + " AND l.likedFlag = 1";
     //指定した従業員が、指定した日報に押したいいねを取得する(likedFlagは0でも1でも取得する)
-    String Q_LIKE_GET_BY_EMPID_AND_REPID = ENTITY_LIKE + ".getByEmpIdAndRepId";
-    String Q_LIKE_GET_BY_EMPID_AND_REPID_DEF = "SELECT l FROM Like AS l WHERE l.employee = :" + JPQL_PARM_EMPLOYEE + " AND l.report = :" + JPQL_PARM_REPORT;
+    String Q_LIKE_GET_BY_EMP_AND_REP = ENTITY_LIKE + ".getByEmpAndRep";
+    String Q_LIKE_GET_BY_EMP_AND_REP_DEF = "SELECT l FROM Like AS l WHERE l.employee = :" + JPQL_PARM_EMPLOYEE + " AND l.report = :" + JPQL_PARM_REPORT;
 }

@@ -14,6 +14,7 @@ import actions.views.ReportConverter;
 import actions.views.ReportView;
 import constants.AttributeConst;
 import constants.ForwardConst;
+import constants.JpaConst;
 import constants.MessageConst;
 import models.Employee;
 import models.Like;
@@ -37,7 +38,7 @@ public class LikeAction extends ActionBase {
     }
 
     public void createOrUpdate() throws ServletException, IOException {
-        //if(checkToken()) {
+        if(checkToken()) {
             EmployeeView ev = (EmployeeView)getSessionScope(AttributeConst.LOGIN_EMP);
             Employee e = EmployeeConverter.toModel(ev);
             ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
@@ -45,7 +46,7 @@ public class LikeAction extends ActionBase {
             Like like = null;
 
             try {
-                like = likeService.getByEmpIdAndRepId(e, r);
+                like = likeService.getByEmpAndRep(e, r);
             } catch (NoResultException ex) {
 
             }
@@ -67,19 +68,22 @@ public class LikeAction extends ActionBase {
 
             putSessionScope(AttributeConst.FLUSH, MessageConst.I_REGISTERED.getMessage());
             redirect(ForwardConst.ACT_REP, ForwardConst.CMD_INDEX);
-        //}
+        }
 
 
     }
 
     public void index() throws ServletException, IOException {
-        int reportId = toNumber(getRequestParam(AttributeConst.REP_ID));
-        ReportView rv = reportService.findOne(reportId);
-        List<LikeView> likes = likeService.getPerReport(rv);
+        int page = getPage();
+        ReportView rv = reportService.findOne(toNumber(getRequestParam(AttributeConst.REP_ID)));
+        List<LikeView> likes = likeService.getPerReportPerPage(rv, page);
 
-        long likesCount = likeService.countAllPerReport(rv);
+        long likeCount = likeService.countAllPerReport(rv);
+
         putRequestScope(AttributeConst.LIKES, likes);
-        putRequestScope(AttributeConst.LIKE_COUNT, likesCount);
+        putRequestScope(AttributeConst.LIKE_COUNT, likeCount);
+        putRequestScope(AttributeConst.PAGE, page);
+        putRequestScope(AttributeConst.MAX_ROW, JpaConst.ROW_PER_PAGE);
 
         String flush = getSessionScope(AttributeConst.FLUSH);
         if (flush != null) {

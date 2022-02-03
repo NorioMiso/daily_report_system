@@ -4,6 +4,7 @@
 <%@ page import="constants.ForwardConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
+<c:set var="actLike" value="${ForwardConst.ACT_LIKE.getValue()}" />
 <c:set var="commIdx" value="${ForwardConst.CMD_INDEX.getValue()}" />
 
 <c:import url="/WEB-INF/views/layout/app.jsp">
@@ -14,11 +15,11 @@
             </div>
         </c:if>
         <h2>いいね　一覧</h2>
-        <table id="report_list">
+        <table id="like_list">
             <tbody>
                 <tr>
-                    <th class="like_name">氏名</th>
-                    <th class="like_date">日付</th>
+                    <th class="like_name">いいね！した人</th>
+                    <th class="like_date">いいね！された日付</th>
                 </tr>
                 <c:forEach var="like" items="${likes}" varStatus="status">
                     <tr class="row${status.count % 2}">
@@ -29,6 +30,22 @@
                 </c:forEach>
             </tbody>
         </table>
+
+        <div id="pagination">
+            （全 ${like_count} 件）<br />
+
+                <c:forEach var="i" begin="1" end="${((like_count - 1) / maxRow) + 1}" step="1">
+                    <c:choose>
+                        <c:when test="${i == page}">
+                            <c:out value="${i}" />&nbsp;
+                        </c:when>
+                        <c:otherwise>
+                            <a href="<c:url value='?action=${actLike}&command=${commIdx}&page=${i}' />"><c:out value="${i}" /></a>&nbsp;
+                        </c:otherwise>
+                    </c:choose>
+                </c:forEach>
+
+        </div>
 
         <p>
             <a href="<c:url value='?action=${actRep}&command=${commIdx}' />">一覧に戻る</a>

@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ page import="constants.ForwardConst" %>
+<%@ page import="constants.AttributeConst" %>
 
 <c:set var="actRep" value="${ForwardConst.ACT_REP.getValue()}" />
 <c:set var="actLike" value="${ForwardConst.ACT_LIKE.getValue()}" />
@@ -16,7 +17,7 @@
 
         <h2>日報 詳細ページ</h2>
 
-        <table>
+        <table id="report_show">
             <tbody>
                 <tr>
                     <th>氏名</th>
@@ -50,11 +51,14 @@
 
         <br />
         <form method="POST" action="<c:url value='?action=${actLike}&command=${commCrtOrUpd}&id=${report.id}' />">
-            <input type="hidden" name="${AttributeConst.REP_ID.getValue()}" value="${report.id}" />
-            <input type="hidden" name="${AttributeConst.LIKE.getValue()}" value="${AttributeConst.LIKE_DONE.getIntegerValue()}" />
             <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
-            <button type="submit">この日報にいいね！する</button>
-　　      </form>
+            <c:choose>
+                <c:when test="${not_liked_yet == true}"><button type="submit">この日報へいいね！する</button></c:when>
+                <c:otherwise><button type="submit">この日報へのいいね！を取り消す</button></c:otherwise>
+            </c:choose>
+
+        </form>
+
 
         <c:if test="${sessionScope.login_employee.id == report.employee.id}">
             <p>

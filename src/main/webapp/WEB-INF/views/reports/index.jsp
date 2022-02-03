@@ -25,7 +25,7 @@
                     <th class="report_like">いいね！された数</th>
                     <th class="report_action">操作</th>
                 </tr>
-                <c:forEach begin="0" end="${reports.size()-1}" step="1" var="i">
+                <c:forEach begin="0" end="${reports.size()-1}" step="1" var="i" varStatus="status">
                     <fmt:parseDate value="${reports[i].reportDate}" pattern="yyyy-MM-dd" var="reportDay" type="date" />
 
                     <tr class="row${status.count % 2}">

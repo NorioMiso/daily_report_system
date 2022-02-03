@@ -43,7 +43,8 @@ public enum AttributeConst {
     LIKE_ID("id"),
     LIKED_FLAG("liked_flag"),
     LIKE_DONE(1),
-    LIKE_NONE(0);
+    LIKE_NONE(0),
+    LIKE_NOT_LIKED_YET("not_liked_yet");
 
     private final String text;
     private final Integer i;

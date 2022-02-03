@@ -15,13 +15,18 @@ import models.Like;
 import models.Report;
 
 public class LikeService extends ServiceBase{
-    public List<LikeView> getPerReport(ReportView report) {
+
+    // 指定したレポートに対するいいねのリストを1ページ分返す
+    public List<LikeView> getPerReportPerPage(ReportView report, int page) {
         List<Like> likes = em.createNamedQuery(JpaConst.Q_LIKE_GET_ALL_MINE, Like.class)
                 .setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
+                .setFirstResult(JpaConst.ROW_PER_PAGE * (page - 1))
+                .setMaxResults(JpaConst.ROW_PER_PAGE)
                 .getResultList();
         return LikeConverter.toViewList(likes);
     }
 
+    // 指定したレポートに対するいいねの数を返す
     public long countAllPerReport (ReportView report) {
         long count = (long) em.createNamedQuery(JpaConst.Q_LIKE_COUNT_ALL_PER_REPORT, Long.class)
                 .setParameter(JpaConst.JPQL_PARM_REPORT, ReportConverter.toModel(report))
@@ -29,12 +34,14 @@ public class LikeService extends ServiceBase{
         return count;
     }
 
+    // idを引数として、LikeViewを返す
     public LikeView findOne(int id) {
         return LikeConverter.toView(findOneInternal(id));
     }
 
-    public Like getByEmpIdAndRepId(Employee employee, Report report) {
-        Like like = em.createNamedQuery(JpaConst.Q_LIKE_GET_BY_EMPID_AND_REPID, Like.class)
+    // 指定した従業員が、指定したレポートにしたいいねを返す
+    public Like getByEmpAndRep(Employee employee, Report report) {
+        Like like = em.createNamedQuery(JpaConst.Q_LIKE_GET_BY_EMP_AND_REP, Like.class)
                 .setParameter(JpaConst.JPQL_PARM_EMPLOYEE, employee)
                 .setParameter(JpaConst.JPQL_PARM_REPORT,  report)
                 .getSingleResult();
