@@ -53,7 +53,7 @@
         <form method="POST" action="<c:url value='?action=${actLike}&command=${commCrtOrUpd}&id=${report.id}' />">
             <input type="hidden" name="${AttributeConst.TOKEN.getValue()}" value="${_token}" />
             <c:choose>
-                <c:when test="${not_liked_yet == true}"><button type="submit">この日報へいいね！する</button></c:when>
+                <c:when test="${not_liked_yet == true}"><button type="submit"><img src="/images/like.png"></button></c:when>
                 <c:otherwise><button type="submit">この日報へのいいね！を取り消す</button></c:otherwise>
             </c:choose>
 
